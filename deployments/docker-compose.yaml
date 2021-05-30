@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  todo-app:
+    container_name: todo-app
+    image: releasepraqma/todo-app
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: todos
+      MYSQL_PASSWORD: todos
+      MYSQL_DB: todos
+
+  mysql:
+    image: mysql:5.7
+    # we only add the portfoward so that kompose will generate a service for us
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+      MYSQL_USER: todos
+      MYSQL_PASSWORD: todos
